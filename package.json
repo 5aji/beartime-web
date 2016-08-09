@@ -1,0 +1,28 @@
+{
+  "name": "beartime-web",
+  "description": "An intuitive and simple schedule web app designed for the convulted schedule of the Blake School, home of the Blake Bears",
+  "author": "Kincaid O'Neil",
+  "scripts": {
+    "dev": "webpack-dev-server --inline --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+  },
+  "dependencies": {
+    "lodash": "^4.14.2",
+    "moment": "^2.14.1",
+    "vue": "^2.0.0-beta.7"
+  },
+  "devDependencies": {
+    "babel-core": "^6.0.0",
+    "babel-loader": "^6.0.0",
+    "babel-preset-es2015": "^6.13.2",
+    "cross-env": "^1.0.6",
+    "css-loader": "^0.23.1",
+    "file-loader": "^0.8.4",
+    "json-loader": "^0.5.4",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^2.1.2",
+    "vue-loader": "^9.2.2",
+    "webpack": "^2.1.0-beta.20",
+    "webpack-dev-server": "^2.1.0-beta.0"
+  }
+}
