@@ -22,7 +22,7 @@
       "name": "Tutorial",
       "start": "9:50am",
       "end": "10:15am",
-      "duration": 35
+      "duration": 25
     },
     {
       "number": 3,
@@ -85,11 +85,17 @@
       "duration": 65
     },
     {
-			"name": "Assembly/Advisory",
+			"name": "Assembly",
 			"start": "9:10am",
-			"end": "9:50am",
-			"duration": 40
+			"end": "9:40am",
+			"duration": 30
 		},
+    {
+      "name": "Advisory",
+      "start": "9:45am",
+      "end": "9:50am",
+      "duration": 5
+    },
     {
 			"number": 4,
 			"start": "9:55am",
@@ -145,7 +151,7 @@
       "duration": 65
     },
     {
-			"name": "Grade Meeting/Advisory",
+			"name": "Grade Meeting",
 			"start": "9:40am",
 			"end": "10:15am",
 			"duration": 35
@@ -205,11 +211,17 @@
       "duration": 65
     },
     {
-			"name": "Assembly/Advisory",
+			"name": "Assembly",
 			"start": "9:10am",
-			"end": "9:50am",
-			"duration": 40
+			"end": "9:40am",
+			"duration": 30
 		},
+    {
+      "name": "Advisory",
+      "start": "9:45am",
+      "end": "9:50am",
+      "duration": 5
+    },
     {
 			"number": 1,
 			"start": "9:55am",
