@@ -1,3 +1,25 @@
+<style lang="stylus">
+  
+  html, body
+    width: 100%
+    height: 100%
+    margin: 0
+    padding: 0
+  
+  #schedule
+    display: flex
+    flex-direction: row
+    align-items: flex-end
+    
+    .day
+      width: 180px
+      margin-right: 10px
+      float: left
+      
+    .day:last-of-type
+      margin-right: 0
+    
+</style>
 <template>
   <div id="schedule">
     <div v-for="day in week" class="day">
@@ -83,21 +105,3 @@
   }
   
 </script>
-<style lang="stylus">
-  
-  html, body
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: "Segoe UI", "San Francisco", "Helvetica Neue", "Helvetica", "Arial", sans-serif
-    
-  .day
-    width: 200px
-    margin-right: 10px
-    float: left;
-    
-  .day:last-of-type
-    margin-right: 0
-  
-</style>
