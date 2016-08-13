@@ -37,7 +37,10 @@
                 day === _countdown.day && _countdown.before">
                 {{ _countdown.text }}
               </div>
+                <span class="blockName" v-if="block.name && block.lunch">
+                  <span class="lunch" @click="toggleLunch(day, block.lunch)"
                     title="Toggle Lunch">{{ block.lunch | lunchText }}</span> {{ block.name }}
+                </span>
               <div class="countdown" v-if="j === _countdown.index &&
                 day === _countdown.day && !_countdown.before">
                 {{ _countdown.text }}
@@ -104,6 +107,10 @@
         return schedule[day.format('dddd')].filter(row => {
           if (!row.lunch || row.lunch === 1) return row
         })
+      toggleLunch(day, oldLunch) {
+        let newLunch = (oldLunch === 1) ? 2 : 1
+        this.lunches[day] = newLunch
+      },
       updateTime() {
         // Set timer for subsequent update
         setTimeout(() => {
