@@ -1,22 +1,110 @@
 <style lang="stylus">
-  
+      
+  font-styling()
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "Helvetica", "Arial", sans-serif
+    font-size: 18px
+    color: white
+    
   html, body
     width: 100%
     height: 100%
     margin: 0
     padding: 0
-  
+    background: #546E7A
+    font-styling()
+    
+  #container
+    width: 100%
+    height: 100%
+    display: flex
+    align-items: center
+    justify-content: space-around
+    flex-direction: column
+    
+  .header
+    width: 100%
+    font-weight: normal
+    font-family: "Montserrat"
+    font-size: 48px
+    text-transform: uppercase
+    text-align: center
+    
   #schedule
     display: flex
-    flex-direction: row
-    align-items: flex-end
     
-    .day
+    .dayContainer
       width: 180px
       margin-right: 10px
-      float: left
+      flex-grow: 1
+      display: flex
+      flex-direction: column
+      justify-content: space-between
       
-    .day:last-of-type
+      .dayHeader
+        width: 100%
+        padding: 6px 6px 8px 6px
+        box-sizing: border-box
+        align-self: flex-start
+        text-align: center
+        font-size: 18px
+        
+      .day
+        width: 100%
+        align-self: flex-end
+        
+        .blockContainer
+          width: 100%
+          float: left
+          
+          .beforeBlock
+            width: 100%
+            margin: calc(5px * 0.5 * 1.2) 0
+            float: left
+            
+          .block
+            width: 180px
+            padding: 6px
+            border-radius: 4px
+            float: left
+            box-sizing: border-box
+            background: darkgray
+            
+            .blockHeader
+              width: 100%
+              height: 20px
+              float: left
+              display: flex
+              flex-direction: row
+              line-height: 20px
+              
+              .blockNum
+                flex-shrink: 1
+                margin-right: 5px
+                font-weight: bold
+                
+              .blockName
+                flex-grow: 1
+                font-weight: 300
+                
+                .lunch
+                  text-decoration: underline
+                  cursor: pointer
+                  
+              .blockInput
+                width: 100%
+                height: 20px
+                flex-grow: 1
+                border: none
+                outline: none
+                background: transparent
+                font-styling()
+                font-weight: 300
+                line-height: 20px
+                
+              :focus
+                border-bottom: 2px solid white
+                
+    :last-of-type
       margin-right: 0
       
     .countdown
