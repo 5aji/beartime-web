@@ -66,19 +66,7 @@
   
   export default {
     data() {
-      // Create a Moment instance for each day of the current week
-      // On Sunday at 12am, the schedule for the next week will be shown
-      // TODO: Update this on Sunday at 12am, otherwise it's just static...
-      let week = []
-      for (let i = 1; i < 6; i++) {
-        week.push(moment().day(i))
-      }
       return {
-        week,
-        // TODO: Fix this!
-        beforeBlock: false,
-        countdown: '10:02',
-        currentBlockIndex: 0
         // Define default lunches and classes schema so updates are faster/cached
         lunches: { 'Monday': 1, 'Tuesday': 1, 'Wednesday': 1, 'Thursday': 1, 'Friday': 1 },
         classes: { 1: '', 2: '', 3: '', 4: '', 5: '', 6: '', 7: '' },
@@ -108,12 +96,6 @@
       this.restorePrefs('classes')
     },
     methods: {
-      createSchedule(day) {
-        // TODO: Add the ability to set lunch for each day
-        // TODO: Replace with custom schedule if it exists
-        return schedule[day.format('dddd')].filter(row => {
-          if (!row.lunch || row.lunch === 1) return row
-        })
       toggleLunch(day, oldLunch) {
         let newLunch = (oldLunch === 1) ? 2 : 1
         this.lunches[day] = newLunch
@@ -132,13 +114,6 @@
       }
     },
       },
-      getCurrentBlock() {
-        let now = moment()
-        _.forEach(this.schedule, (row, i) => {
-          let remaining, diff
-          // For testing purposes, set date to this Monday
-          let blockStartTime = moment(row.start, 'h:ma')
-          let blockEndTime = moment(row.end, 'h:ma')
       _countdown() {
         let now = moment(this.now)
         let day = now.format('dddd')
