@@ -18,13 +18,28 @@
       
     .day:last-of-type
       margin-right: 0
-    
+      
+    .countdown
+      margin: 1px 0 2px 0
+      float: left
+      font-size: 24px
+      font-weight: 300
+      line-height: 24px
+      
 </style>
 <template>
   <div id="schedule">
     <div v-for="day in week" class="day">
       <!-- TODO: How should I filter out lunches? -->
       <Block v-for="block in createSchedule(day)" :block="block"></Block>
+              <div class="countdown" v-if="j === _countdown.index &&
+                day === _countdown.day && _countdown.before">
+                {{ _countdown.text }}
+              </div>
+              <div class="countdown" v-if="j === _countdown.index &&
+                day === _countdown.day && !_countdown.before">
+                {{ _countdown.text }}
+              </div>
     </div>
   </div>
 </template>
@@ -60,6 +75,12 @@
         return schedule[day.format('dddd')].filter(row => {
           if (!row.lunch || row.lunch === 1) return row
         })
+      updateTime() {
+        // Set timer for subsequent update
+        setTimeout(() => {
+          this.now = moment().valueOf()
+        }, 1000 - moment().millisecond())
+      },
       },
       getCurrentBlock() {
         let now = moment()
@@ -68,38 +89,55 @@
           // For testing purposes, set date to this Monday
           let blockStartTime = moment(row.start, 'h:ma')
           let blockEndTime = moment(row.end, 'h:ma')
+      _countdown() {
+        let now = moment(this.now)
+        let day = now.format('dddd')
+        let schedule = this._schedule[day]
+        // If it's Saturday or Sunday, don't show countdown timer
+        if (_.isUndefined(schedule)) return { show: false }
+        let countdown = {}
+        let index = 0
+        // Loop through all blocks, determining which is currently occuring
+        // Then calculate the remaining duration
+        for (let block of schedule) {
+          let remaining, before
+          let startTime = moment(block.start, 'h:ma')
+          let endTime = moment(block.end, 'h:ma')
           // Countdown until the end of the current block
-          if (now.isSameOrAfter(blockStartTime) && now.isBefore(blockEndTime)) {
-            remaining = blockEndTime.diff(now)
-            diff = moment.utc(remaining)
-            this.beforeBlock = false
+          if (now.isSameOrAfter(startTime) && now.isBefore(endTime)) {
+            remaining = moment.duration(endTime.diff(now), 'ms')
+            before = false
           }
-          // Countdown until school begins
-          else if (i === 0 && now.isBefore(blockStartTime)) {
-            remaining = blockStartTime.diff(now)
-            // Only if school starts in under an hour
-            if (moment.duration(remaining, 'ms').asHours() <= 1) {
-              diff = moment.utc(remaining)
-            }
-            this.beforeBlock = true
+          // Countdown until school begins if school starts in under 1 hour
+          else if (index === 0 && now.isBefore(startTime.subtract(1, 'hour'))) {
+            remaining = moment.duration(startTime.diff(now), 'ms')
+            before = true
           }
           // Countdown until the next block (passing time)
-          else if (now.isBefore(blockStartTime)) {
-            remaining = blockStartTime.diff(now)
-            diff = moment.utc(remaining)
-            this.beforeBlock = true
+          else if (now.isBefore(startTime)) {
+            remaining = moment.duration(startTime.diff(now), 'ms')
+            before = true
           }
-          // School is out for the day!
-          else if (i === (this.state.schedule.length - 1) && now.isAfter(blockEndTime)) {
-            this.message = 'School is out for the day :D'
+          // Otherwise, simply check the next block
+          else if (index < schedule.length - 1) {
+            index++
+            continue
           }
-          if (!_.isUndefined(diff)) {
-            this.countdown = (moment.duration(remaining, 'ms').asHours() >= 1) ? diff.format('h:mm:ss') : diff.format('m:ss')
-            this.currentBlockIndex = i
-            setTimeout(this.getCurrentBlock, 500)
-            return
+          // After we've checked every block to no avail, hide the countdown
+          else {
+            countdown = { show: false }
+            break
           }
-        })
+          // Create and return the countdown text
+          countdown = {
+            show: true,
+            text: remaining.format('h:mm:ss'),
+            index, before, day
+          }
+          break
+        }
+        this.updateTime()
+        return countdown
       }
     }
   }
