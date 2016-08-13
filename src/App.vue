@@ -53,6 +53,9 @@
   import schedule from './schedule.json'
   
   import _ from 'lodash'
+  import Vue from 'vue'
+  import moment from 'moment'
+  import 'moment-duration-format'
   
   // Map lunch number to the text version
   Vue.filter('lunchText', (lunch) => {
@@ -70,7 +73,16 @@
         // Define default lunches and classes schema so updates are faster/cached
         lunches: { 'Monday': 1, 'Tuesday': 1, 'Wednesday': 1, 'Thursday': 1, 'Friday': 1 },
         classes: { 1: '', 2: '', 3: '', 4: '', 5: '', 6: '', 7: '' },
+        // Constants, pretty much
+        schedule,
+        sizing: 1.2,
+        week: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        colors: ['#3F51B5', '#1976D2', '#03A9F4', '#00BCD4', '#009688', '#4CAF50', '#8BC34A'],
         isCrawler: /bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent),
+        // Important to trigger updates for countdown timer
+        now: moment().valueOf()
+      }
+    },
     watch: {
       // Update title of page with current time (a full old BearTime replacement!)
       '_countdown.text'() {
