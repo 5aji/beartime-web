@@ -38,7 +38,7 @@
       "duration": 45
     },
     {
-      "name": "First Lunch",
+      "name": "Lunch",
       "lunch": 1,
       "start": "11:10am",
       "end": "11:40am",
@@ -52,7 +52,7 @@
       "duration": 45
     },
     {
-      "name": "Second Lunch",
+      "name": "Lunch",
       "lunch": 2,
       "start": "12:00pm",
       "end": "12:30pm",
@@ -85,11 +85,11 @@
       "duration": 65
     },
     {
-			"name": "Assembly",
-			"start": "9:10am",
-			"end": "9:40am",
-			"duration": 30
-		},
+      "name": "Assembly",
+      "start": "9:10am",
+      "end": "9:40am",
+      "duration": 30
+    },
     {
       "name": "Advisory",
       "start": "9:45am",
@@ -97,12 +97,12 @@
       "duration": 5
     },
     {
-			"number": 4,
-			"start": "9:55am",
-			"end": "11:00am",
-			"duration": 65
-		},
-		{
+      "number": 4,
+      "start": "9:55am",
+      "end": "11:00am",
+      "duration": 65
+    },
+    {
       "number": 5,
       "lunch": 2,
       "start": "11:05am",
@@ -110,7 +110,7 @@
       "duration": 65
     },
     {
-      "name": "First Lunch",
+      "name": "Lunch",
       "lunch": 1,
       "start": "11:05am",
       "end": "11:30am",
@@ -124,24 +124,24 @@
       "duration": 65
     },
     {
-      "name": "Second Lunch",
+      "name": "Lunch",
       "lunch": 2,
       "start": "12:15pm",
       "end": "12:40pm",
       "duration": 25
     },
-		{
-			"number": 7,
-			"start": "12:45pm",
-			"end": "1:50pm",
-			"duration": 65
-		},
-		{
-			"number": 6,
-			"start": "1:55pm",
-			"end": "3:00pm",
-			"duration": 65
-		}
+    {
+      "number": 7,
+      "start": "12:45pm",
+      "end": "1:50pm",
+      "duration": 65
+    },
+    {
+      "number": 6,
+      "start": "1:55pm",
+      "end": "3:00pm",
+      "duration": 65
+    }
   ],
   "Wednesday": [
     {
@@ -151,18 +151,18 @@
       "duration": 65
     },
     {
-			"name": "Grade Meeting",
-			"start": "9:40am",
-			"end": "10:15am",
-			"duration": 35
-		},
+      "name": "Grade Meeting",
+      "start": "9:40am",
+      "end": "10:15am",
+      "duration": 35
+    },
     {
-			"number": 2,
-			"start": "10:20am",
-			"end": "11:25am",
-			"duration": 65
-		},
-		{
+      "number": 2,
+      "start": "10:20am",
+      "end": "11:25am",
+      "duration": 65
+    },
+    {
       "number": 4,
       "lunch": 2,
       "start": "11:30am",
@@ -170,7 +170,7 @@
       "duration": 65
     },
     {
-      "name": "First Lunch",
+      "name": "Lunch",
       "lunch": 1,
       "start": "11:30am",
       "end": "12:00pm",
@@ -184,24 +184,24 @@
       "duration": 65
     },
     {
-      "name": "Second Lunch",
+      "name": "Lunch",
       "lunch": 2,
       "start": "12:40pm",
       "end": "1:10pm",
       "duration": 30
     },
-		{
-			"name": "TASC",
-			"start": "1:15pm",
-			"end": "1:50pm",
-			"duration": 35
-		},
-		{
-			"number": 5,
-			"start": "1:55pm",
-			"end": "3:00pm",
-			"duration": 65
-		}
+    {
+      "name": "TASC",
+      "start": "1:15pm",
+      "end": "1:50pm",
+      "duration": 35
+    },
+    {
+      "number": 5,
+      "start": "1:55pm",
+      "end": "3:00pm",
+      "duration": 65
+    }
   ],
   "Thursday": [
     {
@@ -211,11 +211,11 @@
       "duration": 65
     },
     {
-			"name": "Assembly",
-			"start": "9:10am",
-			"end": "9:40am",
-			"duration": 30
-		},
+      "name": "Assembly",
+      "start": "9:10am",
+      "end": "9:40am",
+      "duration": 30
+    },
     {
       "name": "Advisory",
       "start": "9:45am",
@@ -223,12 +223,12 @@
       "duration": 5
     },
     {
-			"number": 1,
-			"start": "9:55am",
-			"end": "11:00am",
-			"duration": 65
-		},
-		{
+      "number": 1,
+      "start": "9:55am",
+      "end": "11:00am",
+      "duration": 65
+    },
+    {
       "number": 3,
       "lunch": 2,
       "start": "11:05am",
@@ -236,7 +236,7 @@
       "duration": 65
     },
     {
-      "name": "First Lunch",
+      "name": "Lunch",
       "lunch": 1,
       "start": "11:05am",
       "end": "11:30am",
@@ -250,26 +250,26 @@
       "duration": 65
     },
     {
-      "name": "Second Lunch",
+      "name": "Lunch",
       "lunch": 2,
       "start": "12:15pm",
       "end": "12:40pm",
       "duration": 25
     },
-		{
-			"number": 6,
-			"start": "12:45pm",
-			"end": "1:50pm",
-			"duration": 65
-		},
-		{
-			"number": 7,
-			"start": "1:55pm",
-			"end": "3:00pm",
-			"duration": 65
-		}
+    {
+      "number": 6,
+      "start": "12:45pm",
+      "end": "1:50pm",
+      "duration": 65
+    },
+    {
+      "number": 7,
+      "start": "1:55pm",
+      "end": "3:00pm",
+      "duration": 65
+    }
   ],
-	"Friday": [
+  "Friday": [
     {
       "name": "Advisory",
       "start": "8:30am",
@@ -302,7 +302,7 @@
       "duration": 45
     },
     {
-      "name": "First Lunch",
+      "name": "Lunch",
       "lunch": 1,
       "start": "11:10am",
       "end": "11:40am",
@@ -316,7 +316,7 @@
       "duration": 45
     },
     {
-      "name": "Second Lunch",
+      "name": "Lunch",
       "lunch": 2,
       "start": "12:00pm",
       "end": "12:30pm",
