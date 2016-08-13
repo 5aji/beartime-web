@@ -113,6 +113,19 @@
         localStorage.setItem(key, JSON.stringify(this[key]))
       }
     },
+    computed: {
+      _schedule() {
+        // Create a new object for parsed scheduled so it doesn't mutate original
+        let schedule = {}
+        for (let day in this.schedule) {
+          // Remove all blocks where the lunch isn't same the as set preference
+          schedule[day] = this.schedule[day].filter(block => {
+            // Keep block if lunch property doesn't exist or if lunch corresponds with the pref
+            // Otherwise, return false and remove it
+            return !block.lunch || (block.lunch === this.lunches[day])
+          })
+        }
+        return schedule
       },
       _countdown() {
         let now = moment(this.now)
