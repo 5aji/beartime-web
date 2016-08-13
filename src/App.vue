@@ -82,6 +82,13 @@
         // Define default lunches and classes schema so updates are faster/cached
         lunches: { 'Monday': 1, 'Tuesday': 1, 'Wednesday': 1, 'Thursday': 1, 'Friday': 1 },
         classes: { 1: '', 2: '', 3: '', 4: '', 5: '', 6: '', 7: '' },
+    watch: {
+      // Update title of page with current time (a full old BearTime replacement!)
+      '_countdown.text'() {
+        if (this.isCrawler) return
+        let text = this._countdown.text
+        document.title = (text) ? `${text} \u2022 BearTime` : 'BearTime'
+      },
       'lunches': {
         handler() {
           this.updatePrefs('lunches')
