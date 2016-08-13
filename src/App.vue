@@ -31,24 +31,40 @@
       
 </style>
 <template>
-  <div id="schedule">
-    <div v-for="day in week" class="day">
-      <!-- TODO: How should I filter out lunches? -->
-      <Block v-for="block in createSchedule(day)" :block="block"></Block>
+  <div id="container">
+    <div class="header">BearTime</div>
+    <div id="schedule">
+      <div class="dayContainer" v-for="(day, i) in week" :class="{
         notToday: _countdown.show && day !== _countdown.day }">
         <header class="dayHeader">{{ now | dateText(day, i) }}</header>
+        <div class="day">
+          <div class="blockContainer" v-for="(block, j) in _schedule[day]">
+            <div class="beforeBlock" v-if="j !== 0">
               <div class="countdown" v-if="j === _countdown.index &&
                 day === _countdown.day && _countdown.before">
                 {{ _countdown.text }}
               </div>
+            </div>
+            <div class="block" :style="{ minHeight: String(block.duration * sizing) + 'px',
+              background: colors[block.number - 1] }">
+              <header class="blockHeader">
+                <span class="blockNum" v-if="block.number">{{ block.number }}</span>
+                <span class="blockName" v-if="block.name && !block.lunch">{{ block.name }}</span>
                 <span class="blockName" v-if="block.name && block.lunch">
                   <span class="lunch" @click="toggleLunch(day, block.lunch)"
                     title="Toggle Lunch">{{ block.lunch | lunchText }}</span> {{ block.name }}
                 </span>
+                <input class="blockInput" v-if="!block.name" v-model="classes[block.number]"
+                  :autofocus="i === 0 && block.number === 1 && !classes[block.number]" />
+              </header>
               <div class="countdown" v-if="j === _countdown.index &&
                 day === _countdown.day && !_countdown.before">
                 {{ _countdown.text }}
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
