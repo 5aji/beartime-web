@@ -45,13 +45,11 @@
 </template>
 <script>
   
-  import Block from './Block.vue'
-  import schedule from './assets/schedule.json'
-  import moment from 'moment'
+  import schedule from './schedule.json'
+  
   import _ from 'lodash'
   
   export default {
-    components: { Block },
     data() {
       // Create a Moment instance for each day of the current week
       // On Sunday at 12am, the schedule for the next week will be shown
