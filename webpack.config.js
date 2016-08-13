@@ -20,10 +20,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel',
-        exclude: /node_modules/,
-        presets: [
-          ["es2015", { "modules": false }]
-        ]
+        exclude: /node_modules/
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -40,7 +37,7 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: true
+    noInfo: false
   },
   devtool: '#eval-source-map'
 }
