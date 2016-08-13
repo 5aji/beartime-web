@@ -32,6 +32,7 @@
     <div v-for="day in week" class="day">
       <!-- TODO: How should I filter out lunches? -->
       <Block v-for="block in createSchedule(day)" :block="block"></Block>
+        <header class="dayHeader">{{ now | dateText(day, i) }}</header>
               <div class="countdown" v-if="j === _countdown.index &&
                 day === _countdown.day && _countdown.before">
                 {{ _countdown.text }}
@@ -48,6 +49,11 @@
   import schedule from './schedule.json'
   
   import _ from 'lodash'
+  
+  // Update date headers based current time, so they automatically change
+  Vue.filter('dateText', (now, day, i) => {
+    return `${day}, ${moment(now).day(i + 1).format('M/D')}`
+  })
   
   export default {
     data() {
