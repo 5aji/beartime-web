@@ -66,7 +66,26 @@
         beforeBlock: false,
         countdown: '10:02',
         currentBlockIndex: 0
+        // Define default lunches and classes schema so updates are faster/cached
+        lunches: { 'Monday': 1, 'Tuesday': 1, 'Wednesday': 1, 'Thursday': 1, 'Friday': 1 },
+        classes: { 1: '', 2: '', 3: '', 4: '', 5: '', 6: '', 7: '' },
+      'lunches': {
+        handler() {
+          this.updatePrefs('lunches')
+        },
+        deep: true
+      },
+      'classes': {
+        handler() {
+          this.updatePrefs('classes')
+        },
+        deep: true
       }
+    },
+    mounted() {
+      // Restore preferences
+      this.restorePrefs('lunches')
+      this.restorePrefs('classes')
     },
     methods: {
       createSchedule(day) {
@@ -81,6 +100,13 @@
           this.now = moment().valueOf()
         }, 1000 - moment().millisecond())
       },
+      restorePrefs(key) {
+        _.merge(this[key], JSON.parse(localStorage.getItem(key)) || {})
+      },
+      updatePrefs(key) {
+        localStorage.setItem(key, JSON.stringify(this[key]))
+      }
+    },
       },
       getCurrentBlock() {
         let now = moment()
