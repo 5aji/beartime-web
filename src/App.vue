@@ -37,6 +37,7 @@
                 day === _countdown.day && _countdown.before">
                 {{ _countdown.text }}
               </div>
+                    title="Toggle Lunch">{{ block.lunch | lunchText }}</span> {{ block.name }}
               <div class="countdown" v-if="j === _countdown.index &&
                 day === _countdown.day && !_countdown.before">
                 {{ _countdown.text }}
@@ -49,6 +50,11 @@
   import schedule from './schedule.json'
   
   import _ from 'lodash'
+  
+  // Map lunch number to the text version
+  Vue.filter('lunchText', (lunch) => {
+    return (lunch === 1) ? 'First' : 'Second'
+  })
   
   // Update date headers based current time, so they automatically change
   Vue.filter('dateText', (now, day, i) => {
