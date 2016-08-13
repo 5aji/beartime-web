@@ -1,6 +1,6 @@
 # BearTime for Web
 
-An intuitive web app to simplify the convoluted schedule of the Blake School.
+> An intuitive web app to simplify the convoluted schedule of the Blake School.
 
 ## Build Setup
 
