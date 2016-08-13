@@ -26,12 +26,16 @@
       font-weight: 300
       line-height: 24px
       
+    .notToday
+      opacity: 0.6
+      
 </style>
 <template>
   <div id="schedule">
     <div v-for="day in week" class="day">
       <!-- TODO: How should I filter out lunches? -->
       <Block v-for="block in createSchedule(day)" :block="block"></Block>
+        notToday: _countdown.show && day !== _countdown.day }">
         <header class="dayHeader">{{ now | dateText(day, i) }}</header>
               <div class="countdown" v-if="j === _countdown.index &&
                 day === _countdown.day && _countdown.before">
