@@ -152,14 +152,12 @@
                 <input class="blockInput" v-if="!block.name" v-model="shared.classes[block.number]"
                   :autofocus="i === 0 && block.number === 1 && !shared.classes[block.number]" />
               </header>
-              <template v-if="!_countdown.before">
-                <div class="countdown" v-if="block._id === _countdown._id">
-                  {{ _countdown.text }}
-                </div>
-                <div class="classTimes" v-else v-if="block.duration >= 45">
-                  {{ block.start }}-{{ block.end }}
-                </div>
-              </template>
+              <div class="countdown" v-if="block._id === _countdown._id && !_countdown.before">
+                {{ _countdown.text }}
+              </div>
+              <div class="classTimes" v-else v-if="block.duration >= 45">
+                {{ block.start }}-{{ block.end }}
+              </div>
             </div>
           </div>
         </div>
