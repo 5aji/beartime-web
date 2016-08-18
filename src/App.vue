@@ -1,5 +1,10 @@
 <style lang="stylus">
-      
+  
+  @font-face
+    font-family: Raleway
+    font-style: normal
+    src: url(assets/Raleway-ExtraLight.ttf)
+    
   font-styling()
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "Helvetica", "Arial", sans-serif
     font-size: 18px
