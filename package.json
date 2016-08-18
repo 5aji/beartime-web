@@ -1,6 +1,6 @@
 {
   "name": "beartime-web",
-  "description": "An intuitive and simple schedule web app designed for the convulted schedule of the Blake School, home of the Blake Bears",
+  "description": "An intuitive web app to simplify the convoluted schedule of the Blake School.",
   "author": "Kincaid O'Neil",
   "scripts": {
     "dev": "webpack-dev-server --inline --hot",
