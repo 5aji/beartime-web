@@ -8,6 +8,7 @@
   font-styling()
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "Helvetica", "Arial", sans-serif
     font-size: 18px
+    line-height: 18px
     color: white
     
   html, body
@@ -16,22 +17,18 @@
     margin: 0
     padding: 0
     background: #546E7A
-    font-styling()
-    
-  #container
-    width: 100%
-    height: 100%
     display: flex
     align-items: center
-    justify-content: space-around
-    flex-direction: column
+    justify-content: center
+    overflow-x: hidden
+    overflow-y: auto
+    font-styling()
     
   .header
     width: 100%
-    font-weight: normal
-    font-family: "Montserrat"
-    font-size: 48px
-    text-transform: uppercase
+    margin-bottom: 40px
+    font-family: "Raleway"
+    font-size: 56px
     text-align: center
     
   #schedule
@@ -83,6 +80,7 @@
               line-height: 20px
               
               .blockNum
+                margin: 0
                 flex-shrink: 1
                 margin-right: 5px
                 font-weight: bold
@@ -98,6 +96,8 @@
               .blockInput
                 width: 100%
                 height: 20px
+                margin: 0
+                padding: 0
                 flex-grow: 1
                 border: none
                 outline: none
@@ -109,18 +109,22 @@
               :focus
                 border-bottom: 2px solid white
                 
+            .classTimes
+              width: 100%
+              margin-top: 2px
+              float: left
+              font-size: 12px
+                
     :last-of-type
       margin-right: 0
       
     .countdown
-      margin: 1px 0 2px 0
+      width: 100%
+      margin: 2px 0
       float: left
+      line-height: 24px
       font-size: 24px
       font-weight: 300
-      line-height: 24px
-      
-    .notToday
-      opacity: 0.6
       
 </style>
 <template>
