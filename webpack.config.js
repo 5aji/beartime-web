@@ -23,10 +23,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif|svg|ttf)$/,
-        loader: 'file',
-        query: {
-          name: '[hash:8].[ext]'
-        }
+        loader: 'url'
       },
       {
         test: /\.json$/,
