@@ -138,8 +138,8 @@
                 {{ _countdown.text }}
               </div>
             </div>
-            <div class="block" :style="{ minHeight: String(block.duration * sizing) + 'px',
-              background: colors[block.number - 1] }">
+            <div class="block" :style="{ minHeight: String(block.duration * shared.sizing) + 'px',
+              background: shared.colors[block.number - 1] }">
               <header class="blockHeader">
                 <span class="blockNum" v-if="block.number">{{ block.number }}</span>
                 <span class="blockName" v-if="block.name && !block.lunch">{{ block.name }}</span>
@@ -147,8 +147,8 @@
                   <span class="lunch" @click="toggleLunch(day, block.lunch)"
                     title="Toggle Lunch">{{ block.lunch | lunchText }}</span> {{ block.name }}
                 </span>
-                <input class="blockInput" v-if="!block.name" v-model="classes[block.number]"
-                  :autofocus="i === 0 && block.number === 1 && !classes[block.number]" />
+                <input class="blockInput" v-if="!block.name" v-model="shared.classes[block.number]"
+                  :autofocus="i === 0 && block.number === 1 && !shared.classes[block.number]" />
               </header>
               <div class="countdown" v-if="j === _countdown.index &&
                 day === _countdown.day && !_countdown.before">
@@ -163,12 +163,10 @@
 </template>
 <script>
   
-  import schedule from './schedule.json'
-  
-  import _ from 'lodash'
   import Vue from 'vue'
+  import _merge from 'lodash/merge'
+  import beartime from 'beartime-core'
   import moment from 'moment'
-  import 'moment-duration-format'
   
   // Map lunch number to the text version
   Vue.filter('lunchText', (lunch) => {
@@ -183,17 +181,13 @@
   export default {
     data() {
       return {
-        // Define default lunches and classes schema so updates are faster/cached
-        lunches: { 'Monday': 1, 'Tuesday': 1, 'Wednesday': 1, 'Thursday': 1, 'Friday': 1 },
-        classes: { 1: '', 2: '', 3: '', 4: '', 5: '', 6: '', 7: '' },
-        // Constants, pretty much
-        schedule,
-        sizing: 1.2,
-        week: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        colors: ['#3F51B5', '#1976D2', '#03A9F4', '#00BCD4', '#009688', '#4CAF50', '#8BC34A'],
+        // Add all methods and data from beartime-core! Yay :D
+        shared: beartime,
+        // Check if client is crawler so it doesn't see a countdown in the title!
         isCrawler: /bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent),
-        // Important to trigger updates for countdown timer
-        now: moment().valueOf()
+        // Set current time (as a UNIX timestamp to trigger countdown updates)
+        // Moment date objects won't work!
+        now: moment().valueOf(),
       }
     },
     watch: {
@@ -203,13 +197,14 @@
         let text = this._countdown.text
         document.title = (text) ? `${text} \u2022 BearTime` : 'BearTime'
       },
-      'lunches': {
+      // Update prefs in localStorage when bindings change
+      'shared.lunches': {
         handler() {
           this.updatePrefs('lunches')
         },
         deep: true
       },
-      'classes': {
+      'shared.classes': {
         handler() {
           this.updatePrefs('classes')
         },
@@ -217,91 +212,50 @@
       }
     },
     mounted() {
-      // Restore preferences
+      // Load saved class names and first/second lunch preferences for each day
       this.restorePrefs('lunches')
       this.restorePrefs('classes')
     },
     methods: {
       toggleLunch(day, oldLunch) {
         let newLunch = (oldLunch === 1) ? 2 : 1
-        this.lunches[day] = newLunch
+        this.shared.lunches[day] = newLunch
       },
       updateTime() {
-        // Set timer for subsequent update
+        // Set timer to update at the very next second
         setTimeout(() => {
           this.now = moment().valueOf()
         }, 1000 - moment().millisecond())
       },
       restorePrefs(key) {
-        _.merge(this[key], JSON.parse(localStorage.getItem(key)) || {})
+        _merge(this.shared[key], JSON.parse(localStorage.getItem(key)) || {})
       },
       updatePrefs(key) {
-        localStorage.setItem(key, JSON.stringify(this[key]))
+        localStorage.setItem(key, JSON.stringify(this.shared[key]))
       }
     },
     computed: {
       _schedule() {
-        // Create a new object for parsed scheduled so it doesn't mutate original
+        // Generate schedules for each day based on Moment dates relative to the displayDate
+        // Loop through Monday-Friday, setting each daily schedule in the weekly schedule
         let schedule = {}
-        for (let day in this.schedule) {
-          // Remove all blocks where the lunch isn't same the as set preference
-          schedule[day] = this.schedule[day].filter(block => {
-            // Keep block if lunch property doesn't exist or if lunch corresponds with the pref
-            // Otherwise, return false and remove it
-            return !block.lunch || (block.lunch === this.lunches[day])
-          })
+        for (let i = 1; i < 6; i++) {
+          let date = moment(this.displayDate).day(i)
+          let day = date.format('dddd')
+          schedule[day] = this.shared.getSchedule(date, this.shared.lunches)
         }
         return schedule
       },
       _countdown() {
-        let now = moment(this.now)
-        let day = now.format('dddd')
-        let schedule = this._schedule[day]
-        // If it's Saturday or Sunday, don't show countdown timer
-        if (_.isUndefined(schedule)) return { show: false }
-        let countdown = {}
-        let index = 0
-        // Loop through all blocks, determining which is currently occuring
-        // Then calculate the remaining duration
-        for (let block of schedule) {
-          let remaining, before
-          let startTime = moment(block.start, 'h:ma')
-          let endTime = moment(block.end, 'h:ma')
-          // Countdown until the end of the current block
-          if (now.isSameOrAfter(startTime) && now.isBefore(endTime)) {
-            remaining = moment.duration(endTime.diff(now), 'ms')
-            before = false
-          }
-          // Countdown until school begins if school starts in under 1 hour
-          else if (index === 0 && now.isBefore(startTime.subtract(1, 'hour'))) {
-            remaining = moment.duration(startTime.diff(now), 'ms')
-            before = true
-          }
-          // Countdown until the next block (passing time)
-          else if (now.isBefore(startTime)) {
-            remaining = moment.duration(startTime.diff(now), 'ms')
-            before = true
-          }
-          // Otherwise, simply check the next block
-          else if (index < schedule.length - 1) {
-            index++
-            continue
-          }
-          // After we've checked every block to no avail, hide the countdown
-          else {
-            countdown = { show: false }
-            break
-          }
-          // Create and return the countdown text
-          countdown = {
-            show: true,
-            text: remaining.format('h:mm:ss'),
-            index, before, day
-          }
-          break
-        }
+        // Queue subsequent countdown update
         this.updateTime()
-        return countdown
+        // If today is the displayDate and a schedule exists for today,
+        // update and show countdown (i.e., don't update if it's Saturday)
+        let displayDate = moment(this.displayDate)
+        let now = moment(this.now)
+        let schedule = this._schedule[now.format('dddd')]
+        return (displayDate.isSame(now, 'day') && schedule) ?
+          this.shared.getCountdown(this.now, schedule) : { show: false }
       }
     }
   }
