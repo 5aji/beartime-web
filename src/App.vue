@@ -131,9 +131,8 @@
   <div id="container">
     <div class="header">BearTime</div>
     <div id="schedule">
-      <div class="dayContainer" v-for="(day, i) in week" :class="{
-        notToday: _countdown.show && day !== _countdown.day }">
-        <header class="dayHeader">{{ now | dateText(day, i) }}</header>
+      <div class="dayContainer" v-for="(day, i) in shared.week">
+        <header class="dayHeader">{{ displayDate | dateText(i) }}</header>
         <div class="day">
           <div class="blockContainer" v-for="(block, j) in _schedule[day]">
             <div class="beforeBlock" v-if="j !== 0">
@@ -173,13 +172,12 @@
   import moment from 'moment'
   
   // Map lunch number to the text version
-  Vue.filter('lunchText', (lunch) => {
+  Vue.filter('lunchText', lunch => {
     return (lunch === 1) ? 'First' : 'Second'
   })
-  
-  // Update date headers based current time, so they automatically change
-  Vue.filter('dateText', (now, day, i) => {
-    return `${day}, ${moment(now).day(i + 1).format('M/D')}`
+  // Return header text with day and date, corresponding to displayDate
+  Vue.filter('dateText', (displayDate, i) => {
+    return moment(displayDate).day(i + 1).format('dddd, M/D')
   })
   
   export default {
@@ -192,6 +190,8 @@
         // Set current time (as a UNIX timestamp to trigger countdown updates)
         // Moment date objects won't work!
         now: moment().valueOf(),
+        // Set default date to determine week to display
+        displayDate: moment().valueOf()
       }
     },
     watch: {
