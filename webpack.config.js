@@ -22,10 +22,10 @@ module.exports = {
         loader: 'babel'
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif|svg|ttf)$/,
         loader: 'file',
         query: {
-          name: '[name].[ext]?[hash]'
+          name: '[hash:8].[ext]'
         }
       },
       {
