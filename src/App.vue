@@ -136,8 +136,7 @@
         <div class="day">
           <div class="blockContainer" v-for="(block, j) in _schedule[day]">
             <div class="beforeBlock" v-if="j !== 0">
-              <div class="countdown" v-if="j === _countdown.index &&
-                day === _countdown.day && _countdown.before">
+              <div class="countdown" v-if="block._id === _countdown._id && _countdown.before">
                 {{ _countdown.text }}
               </div>
             </div>
@@ -153,10 +152,14 @@
                 <input class="blockInput" v-if="!block.name" v-model="shared.classes[block.number]"
                   :autofocus="i === 0 && block.number === 1 && !shared.classes[block.number]" />
               </header>
-              <div class="countdown" v-if="j === _countdown.index &&
-                day === _countdown.day && !_countdown.before">
-                {{ _countdown.text }}
-              </div>
+              <template v-if="!_countdown.before">
+                <div class="countdown" v-if="block._id === _countdown._id">
+                  {{ _countdown.text }}
+                </div>
+                <div class="classTimes" v-else v-if="block.duration >= 45">
+                  {{ block.start }}-{{ block.end }}
+                </div>
+              </template>
             </div>
           </div>
         </div>
