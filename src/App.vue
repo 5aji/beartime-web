@@ -121,6 +121,23 @@
       font-size: 24px
       font-weight: 300
       
+      
+  footer
+    width: 100%
+    height: 60px
+    font-size: 12px
+    font-weight: 200 !important
+    display: flex
+    justify-content: flex-end
+    flex-direction: column
+    
+    p
+      margin: 0
+      text-align: center
+      
+  a
+    color: white
+      
 </style>
 <template>
   <div id="container">
@@ -158,6 +175,9 @@
         </div>
       </div>
     </div>
+    <footer>
+      <p>Created by <a href="https://kincaidoneil.com">Kincaid O'Neil</a> and <a href="#">Saji Champlin</a></p>
+    </footer>
   </div>
 </template>
 <script>
