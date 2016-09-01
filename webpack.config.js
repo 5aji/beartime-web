@@ -5,7 +5,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/',
+    publicPath: '/dist/',
     filename: 'build.js'
   },
   resolveLoader: {
@@ -19,7 +19,8 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'babel'
+        loader: 'babel',
+        exclude: /node_modules/
       },
       {
         test: /\.(png|jpg|gif|svg|ttf)$/,
