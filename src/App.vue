@@ -166,7 +166,6 @@
   import VueResource from 'vue-resource'
   Vue.use(VueResource)
   import _merge from 'lodash/merge'
-  import beartime from 'beartime-core'
   import moment from 'moment'
   import 'velocity-animate'
   
