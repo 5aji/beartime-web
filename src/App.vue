@@ -1,12 +1,7 @@
 <style lang="stylus">
-  
-  @font-face
-    font-family: Raleway
-    font-style: normal
-    src: url(assets/Raleway-ExtraLight.ttf)
     
   font-styling()
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "Helvetica", "Arial", sans-serif
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", "Helvetica", "Arial", sans-serif
     font-size: 18px
     line-height: 18px
     color: white
@@ -27,8 +22,8 @@
   .header
     width: 100%
     margin-bottom: 40px
-    font-family: "Raleway"
-    font-size: 56px
+    font-weight: 100
+    font-size: 64px
     text-align: center
     
   #schedule
