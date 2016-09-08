@@ -1,11 +1,7 @@
 <style lang="stylus">
-    
-  font-styling()
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", "Helvetica", "Arial", sans-serif
-    font-size: 18px
-    line-height: 18px
-    color: white
-    
+  
+  @import 'global'
+  
   html, body
     width: 100%
     height: 100%
