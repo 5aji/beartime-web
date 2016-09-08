@@ -1,11 +1,12 @@
-var path = require('path')
-var webpack = require('webpack')
+let path = require('path')
+let webpack = require('webpack')
+let htmlPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    publicPath: '/',
     filename: 'build.js'
   },
   resolveLoader: {
@@ -29,9 +30,17 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: false
+    noInfo: false,
+    contentBase: 'dist'
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+    new htmlPlugin({
+      minify: { collapseWhitespace: true },
+      template: 'index.html',
+      inject: true
+    })
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {
