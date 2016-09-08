@@ -193,6 +193,7 @@
   Vue.filter('dateText', (displayDate, i) => {
     return moment(displayDate).day(i + 1).format('dddd, M/D')
   })
+  import store from './store'
   
   export default {
     data() {
@@ -208,6 +209,7 @@
         displayDate: moment().valueOf()
       }
     },
+    data: () => store,
     watch: {
       // Update title of page with current time (a full old BearTime replacement!)
       '_countdown.text'() {
