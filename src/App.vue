@@ -237,6 +237,8 @@
       // Load saved class names and first/second lunch preferences for each day
       this.restorePrefs('lunches')
       this.restorePrefs('classes')
+      // Load initial schedule
+      this.fetchSchedule()
     },
     methods: {
       toggleLunch(day, oldLunch) {
@@ -253,18 +255,41 @@
         _merge(this.shared[key], JSON.parse(localStorage.getItem(key)) || {})
       },
       updatePrefs(key) {
-        localStorage.setItem(key, JSON.stringify(this.shared[key]))
+        localStorage.setItem(key, JSON.stringify(this[key]))
+      },
+      fetchSchedule() {
+        this.loading = true
+        // Fetch weekly schedule from API to cache
+        let url = `http://localhost:3000/api/week/${this.displayDate}`
+        Vue.http.get(url, {
+          timeout: 10000
+        }).then(response => {
+          let schedule = response.json()
+          // Add a unique key to every block for animations
+          // Lunches and A/B classes during lunch have the same ID
+          for (let day in schedule) {
+            let lunchId = _uniqueId()
+            let classId = _uniqueId()
+            for (let block of schedule[day]) {
+              if (block.lunch) {
+                block._id = (block.number) ? classId : lunchId 
+              }
+              else block._id = _uniqueId()
+            }
+          }
+          this.schedule = schedule
+          this.loading = false
+        })
       }
     },
     computed: {
-      _schedule() {
-        // Generate schedules for each day based on Moment dates relative to the displayDate
-        // Loop through Monday-Friday, setting each daily schedule in the weekly schedule
-        let schedule = {}
+      // Generate the week comprised of days YYYY-MM-DD
+      week() {
+        let date = moment(this.displayDate)
+        let week = []
         for (let i = 1; i < 6; i++) {
-          let date = moment(this.displayDate).day(i)
-          let day = date.format('dddd')
-          schedule[day] = this.shared.getSchedule(date, this.shared.lunches)
+          let day = date.day(i).format('YYYY-MM-DD')
+          week.push(day)
         }
         return schedule
       },
