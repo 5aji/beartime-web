@@ -12,7 +12,7 @@ And a huge thanks to Sean Hickey @shickey for making all of this possible.
 
 ### BearStatus Development Team
 
-BearStatus was created by the Blake School Fall 2013 Computer Science class, taught by Sean Hickey. Continuing development and promotion is being done by Ben Weinshel and Jason Shu '15.
+The original BearStatus was created by the Blake School Fall 2013 Computer Science class, taught by Sean Hickey. The project was mantained by Ben Weinshel and Jason Shu '15.
 
 Frontend Development: Allison Eastham '14, Jason Shu '15, Teddy Ankeny '14, Pierce Carlson '15
 
