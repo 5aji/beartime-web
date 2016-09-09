@@ -37,7 +37,8 @@ module.exports = {
   plugins: [
     new htmlPlugin({
       minify: { collapseWhitespace: true },
-      template: 'index.html'
+      template: 'index.html',
+      hash: true
     })
   ]
 }
