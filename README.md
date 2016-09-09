@@ -2,7 +2,7 @@
 
 > An intuitive web app to simplify the convoluted schedule of the Blake School.
 
-![BearTime Screenshot](https://raw.githubusercontent.com/kincaidoneil/beartime-web/master/screenshot.png "BearTime Screenshot")
+![BearTime Screenshot](https://github.com/Foo-Bear/beartime-web/raw/master/screenshot.png "BearTime Screenshot")
 
 ## Build Setup
 
