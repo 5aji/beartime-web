@@ -25,6 +25,15 @@
     font-size: 64px
     line-height: 64px
     text-align: center
+    -webkit-font-smoothing: antialiased
+    
+  .p
+    width: 100%
+    margin-bottom: 30px
+    margin-top: 30px
+    font-weight: 100
+    text-align: center
+    -webkit-font-smoothing: antialiased
     
   .fade-enter-active, .fade-leave-active
     transition: all 0.3s
@@ -78,6 +87,7 @@
         <transition-group name="fade" tag="div" id="week" appear>
           <Day v-for="date in week" :date="date" :key="date" class="day"></Day>
         </transition-group>
+        <p class="p">Created by Kincaid O'Neil and Saji Champlin</p>
       </div>
     </transition>
   </div>
