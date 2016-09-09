@@ -45,8 +45,8 @@
       box-sizing: border-box
       border-radius: 50%
       border-bottom: 6px solid accentColor
-      -webkit-animation: rotate 1s
-      animation: rotate 1s
+      -webkit-animation: rotate 0.6s infinite linear
+      animation: rotate 0.6s infinite linear
       
       @keyframes rotate
         from
