@@ -3,7 +3,7 @@ let webpack = require('webpack')
 let htmlPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: ['./src/index.js'],
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
@@ -37,14 +37,16 @@ module.exports = {
   plugins: [
     new htmlPlugin({
       minify: { collapseWhitespace: true },
-      template: 'index.html',
-      inject: true
+      template: 'index.html'
     })
   ]
 }
 
 if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'
+  // Add Google Analytics code during production
+  module.exports.entry.push('./src/ga.js')
+  // Minify JavaScript
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {
