@@ -1,6 +1,14 @@
 ##Credits
 
-Freddy Rice - Original Beartime
+### BearTime Web
+
+Beartime was created based on the demand for a modernization of Bearstatus.
+
+Frontend Development: Kincaid O'Neil '17 @kincaidoneil
+
+Backend Development/Deployment: Saji Champlin '19 @kschamplin19
+
+And a huge thanks to Sean Hickey @shickey for making all of this possible.
 
 ### BearStatus Development Team
 
@@ -14,12 +22,8 @@ Integration: Noah Abramovitz '14, Yona Cooperman '15, Ben Weinshel '15, Brynne S
 
 Project Management: Walker Bond '15, Quinn Ellis '15, Carolyn Nye '15, Meghna Kaul '14
 
-### Beartime Web
+### BearTime Legacy
 
-Beartime was created due to the demand of a modernization and facelift of Bearstatus.
+Freddie Rice '14
 
-Frontend Development: Kincaid O'Neil @kincaidoneil
 
-Backend Development/Deployment: Saji Champlin @kschamplin19
-
-And a huge thanks to Sean Hickey @shickey for making all of this possible.
