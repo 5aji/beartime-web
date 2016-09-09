@@ -2,7 +2,7 @@
 
 ### BearTime Web
 
-Beartime was created based on the demand for a modernization of Bearstatus.
+BearTime was created based on the demand for a modernization of Bearstatus.
 
 Frontend Development: Kincaid O'Neil '17 @kincaidoneil
 
