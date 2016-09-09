@@ -45,8 +45,8 @@
       box-sizing: border-box
       border-radius: 50%
       border-bottom: 6px solid accentColor
-      -webkit-animation: rotate 1s
-      animation: rotate 1s
+      -webkit-animation: rotate 0.6s infinite linear
+      animation: rotate 0.6s infinite linear
       
       @keyframes rotate
         from
@@ -88,10 +88,8 @@
   import VueResource from 'vue-resource'
   Vue.use(VueResource)
   
-  import enquire from 'enquire.js'
   import _uniqueId from 'lodash/uniqueId'
   import moment from 'moment'
-  import 'moment-duration-format'
   
   import store from './store'
   import Day from './Day.vue'

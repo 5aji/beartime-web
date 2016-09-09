@@ -144,6 +144,7 @@
   import _merge from 'lodash/merge'
   import _find from 'lodash/find'
   import moment from 'moment'
+  import 'moment-duration-format'
   import store from './store'
   
   export default {

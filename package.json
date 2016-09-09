@@ -2,15 +2,21 @@
   "name": "beartime-web",
   "description": "An intuitive web app to simplify the convoluted schedule of the Blake School.",
   "author": "Kincaid O'Neil",
+  "url": "https://beartime.blakeschool.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Foo-Bear/beartime-web.git"
+  },
+  "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot",
+    "dev": "webpack --progress --hide-modules && webpack-dev-server --inline --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
     "lodash": "^4.15.0",
     "moment": "^2.14.1",
     "moment-duration-format": "^1.3.0",
-    "vue": "^2.0.0-rc.4",
+    "vue": "^2.0.0-rc.5",
     "vue-resource": "^0.9.3"
   },
   "devDependencies": {
