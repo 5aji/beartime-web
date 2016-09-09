@@ -88,10 +88,8 @@
   import VueResource from 'vue-resource'
   Vue.use(VueResource)
   
-  import enquire from 'enquire.js'
   import _uniqueId from 'lodash/uniqueId'
   import moment from 'moment'
-  import 'moment-duration-format'
   
   import store from './store'
   import Day from './Day.vue'
