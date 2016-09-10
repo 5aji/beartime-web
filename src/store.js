@@ -12,7 +12,7 @@ export default {
   classes: _merge({ 1: '', 2: '', 3: '', 4: '', 5: '', 6: '', 7: '' },
     JSON.parse(localStorage.getItem('classes')) || {}),
   // Design constants
-  colors: ['#3F51B5', '#1976D2', '#03A9F4', '#00BCD4', '#009688', '#4CAF50', '#8BC34A'],
+  colors: ['#3F51B5', '#1976D2', '#039BE5', '#00BCD4', '#009688', '#43A047', '#7CB342'],
   // Check if client is crawler so it doesn't see a countdown in the title!
   isCrawler: /bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent),
   // Set default dates to determine week to display
