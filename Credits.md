@@ -1,29 +1,27 @@
-##Credits
+# Credits
 
-### BearTime Web
+### BearTime for Web
 
-BearTime was created based on the demand for a modernization of BearStatus.
+BearTime is a new web app designed to replace the aging BearStatus.
 
-Frontend Development: Kincaid O'Neil '17 @kincaidoneil
+Role | Contributors
+--- | ---
+Frontend Development | [Kincaid O'Neil '17](github.com/kincaidoneil)
+Backend Development/Deployment | [Saji Champlin '19](github.com/kschamplin19)
 
-Backend Development/Deployment: Saji Champlin '19 @kschamplin19
+And... a huge thanks to [Sean Hickey](github.com/shickey) for making all of this possible.
 
-And a huge thanks to Sean Hickey @shickey for making all of this possible.
+### BearStatus
 
-### BearStatus Development Team
+The former [BearStatus](github.com/shickey/BearStatus) was created by the Blake School Fall 2013 Computer Science class, taught by [Sean Hickey](github.com/shickey). The project was maintained by Ben Weinshel '15 and Jason Shu '15.
 
-The original BearStatus was created by the Blake School Fall 2013 Computer Science class, taught by Sean Hickey. The project was mantained by Ben Weinshel and Jason Shu '15.
+Role | Contributors
+--- | ---
+Frontend Development | Allison Eastham '14, Jason Shu '15, Teddy Ankeny '14, Pierce Carlson '15
+Backend Development | Kevin Hayes '14, Laura DeMane '15, Anthony Hu '15, Marcus Berg '14
+Integration | Noah Abramovitz '14, Yona Cooperman '15, Ben Weinshel '15, Brynne Swearingen '15
+Project Management | Walker Bond '15, Quinn Ellis '15, Carolyn Nye '15, Meghna Kaul '14
 
-Frontend Development: Allison Eastham '14, Jason Shu '15, Teddy Ankeny '14, Pierce Carlson '15
+### Original BearTime
 
-Backend Development: Kevin Hayes '14, Laura DeMane '15, Anthony Hu '15, Marcus Berg '14
-
-Integration: Noah Abramovitz '14, Yona Cooperman '15, Ben Weinshel '15, Brynne Swearingen '15
-
-Project Management: Walker Bond '15, Quinn Ellis '15, Carolyn Nye '15, Meghna Kaul '14
-
-### BearTime Legacy
-
-Freddie Rice '14
-
-
+Freddie Rice '14 created the original BearTime, a menu bar Mac app with countdown functionality.
