@@ -16,24 +16,7 @@
     display: flex
     flex-direction: column
     justify-content: center
-    flex-align: center
-    
-  .header
-    width: 100%
-    margin-bottom: 30px
-    font-weight: 100
-    font-size: 64px
-    line-height: 64px
-    text-align: center
-    -webkit-font-smoothing: antialiased
-    
-  .p
-    width: 100%
-    margin-bottom: 30px
-    margin-top: 30px
-    font-weight: 100
-    text-align: center
-    -webkit-font-smoothing: antialiased
+    align-items: center
     
   .fade-enter-active, .fade-leave-active
     transition: all 0.3s
@@ -63,18 +46,31 @@
         to
           transform: rotate(360deg)
           
-  #week
+  #schedule
     display: flex
-    align-items: stretch
     justify-content: center
-    flex-direction: row
+    align-items: center
+    flex-direction: column
     
-    .day
-      margin-right: 6px
+    h1
+      width: 100%
+      margin: 0 0 30px 0
+      font-weight: 100
+      font-size: 64px
+      line-height: 100%
+      text-align: center
       
-    :last-of-type
-      margin-right: 0
-        
+    #week
+      display: flex
+      flex-direction: row
+      justify-content: center
+      align-items: space-between
+      
+    footer
+      width: 100%
+      margin: 30px 0 0 0
+      text-align: center
+      
 </style>
 <template>
   <div id="container">
@@ -83,11 +79,11 @@
         <div id="spinner"></div>
       </div>
       <div v-else id="schedule">
-        <h1 class="header">BearTime</h1>
+        <h1>BearTime</h1>
         <transition-group name="fade" tag="div" id="week" appear>
-          <Day v-for="date in week" :date="date" :key="date" class="day"></Day>
+          <Day v-for="date in week" :date="date" :key="date"></Day>
         </transition-group>
-        <p class="p">Created by Kincaid O'Neil and Saji Champlin</p>
+        <footer>Kincaid O'Neil &middot; Saji Champlin</footer>
       </div>
     </transition>
   </div>
@@ -97,10 +93,8 @@
   import Vue from 'vue'
   import VueResource from 'vue-resource'
   Vue.use(VueResource)
-  
   import _uniqueId from 'lodash/uniqueId'
   import moment from 'moment'
-  
   import store from './store'
   import Day from './Day.vue'
   
@@ -144,9 +138,7 @@
             let lunchId = _uniqueId()
             let classId = _uniqueId()
             for (let block of schedule[day]) {
-              if (block.lunch) {
-                block._id = (block.number) ? classId : lunchId 
-              }
+              if (block.lunch) block._id = block.number ? classId : lunchId
               else block._id = _uniqueId()
             }
           }
