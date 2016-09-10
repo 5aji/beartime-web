@@ -119,7 +119,7 @@
               <span class="blockName" v-if="block.name && !block.lunch">{{ block.name }}</span>
               <span class="blockName" v-if="block.name && block.lunch">
                 <span class="lunch" @click="toggleLunch(date, block.lunch)"
-                  title="Toggle Lunch">{{ (block.lunch === 1) ? 'First' : 'Second' }}</span> Lunch
+                  title="Toggle Lunch">{{ block.lunch === 1 ? 'First' : 'Second' }}</span> Lunch
               </span>
               <input class="blockInput" v-if="!block.name" v-model="classes[block.number]"
                 :autofocus="block._id === firstBlock && isDisplayDate && !classes[block.number]" />
@@ -213,7 +213,7 @@
               let text = remaining.format('h:mm:ss')
               this.countdown = {
                 _id: block._id,
-                text, before, end, i
+                block, text, before, end, i
               }
               // Update tab text when countdown updates
               this.updateTitle()
@@ -225,30 +225,11 @@
             else continue
           }
         }
-        // Either no schedule exists, or the school day is over
-        // In either case, reset the countdown but don't queue it:
+        // If the school day is over, reset the countdown--but don't queue it
         // changes to _schedule update it automatically
         this.countdown = { i: 0 }
       },
-      // Update title of page with current time (a full old BearTime replacement!)
-      updateTitle() {
-        let block = _find(this._schedule, { _id: this.countdown._id })
-        let text = this.countdown.text
-        let suffix = '\u2022 BearTime'
-        let title = 'BearTime'
-        if (text && !this.isCrawler) {
-          if (this.countdown.before) {
-            if (block.number && this.classes[block.number]) {
-              title = `${text} until ${this.classes[block.number]} ${suffix}`
-            }
-            else if (block.number) title = `${text} until Block ${block.number} ${suffix}`
-            else title = `${text} until ${block.name} ${suffix}`
-          }
-          else title = `${text} ${suffix}`
-        }
-        document.title = title
-      },
-      // Queue subsequent countdown just after the next second
+      // Queue subsequent countdown 20s after the next second
       queueCountdown() {
         this.queue = setTimeout(this.getCountdown, 1000 - moment().millisecond() + 20)
       },
@@ -257,6 +238,21 @@
         clearTimeout(this.queue)
         this.countdown = { i: 0 }
         this.getCountdown()
+      },
+      // Update title of page with current time (a full old BearTime replacement!)
+      // Only gets called after re-computing the countdown
+      updateTitle() {
+        let title, countdown = this.countdown.text, block = this.countdown.block
+        if (countdown && !this.isCrawler) {
+          // Determine whether the time remaining is before or during the current block
+          let modifier = this.countdown.before ? 'until' : 'in'
+          // Get text for current block
+          // For example: saved class name, "Block 2", or "Advisory"
+          let blockText = block.number ? (this.classes[block.number] || `Block ${block.number}`) : block.name
+          // Put it all together for the title bar text!
+          title = `${countdown} ${modifier} ${blockText} \u2022 BearTime`
+        }
+        document.title = title || 'BearTime'
       }
     },
     computed: {
