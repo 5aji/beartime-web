@@ -150,11 +150,14 @@
     computed: {
       // Generate the week comprised of days YYYY-MM-DD
       week() {
+        this.dimming = false
         let date = moment(this.displayDate)
         let week = []
         for (let i = 1; i < 6; i++) {
           let day = date.day(i).format('YYYY-MM-DD')
           week.push(day)
+          // If one of the days is today, turn on dimming
+          if (day === this.today) this.dimming = true
         }
         return week
       }
