@@ -182,46 +182,37 @@
             return
           }
         }
-        let displayDate = moment(this.displayDate, 'YYYY-MM-DD')
-        // If today is the displayDate and a schedule exists for today,
-        // try checking the subsequent block (i.e., don't update if it's Saturday)
-        if (displayDate.isSame(now, 'day')) {
-          for (let i = this.countdown.i; i < this._schedule.length; i++) {
-            let block = this._schedule[i]
-            let startTime = moment(block.start, 'h:ma')
-            let endTime = moment(block.end, 'h:ma')
-            // If countdown is more than an hour before school, check again later
-            if (i === 0 && now.isBefore(startTime.clone().subtract(1, 'h'))) {
-              this.queueCountdown()
-              return
+        // Try checking the subsequent block
+        for (let i = this.countdown.i; i < this._schedule.length; i++) {
+          let block = this._schedule[i]
+          let startTime = moment(block.start, 'h:ma')
+          let endTime = moment(block.end, 'h:ma')
+          // Countdown until the next block: passing time or under 1 hour before school
+          if (now.isBefore(endTime)) {
+            let remaining, before, end
+            if (now.isBefore(startTime)) {
+              remaining = moment.duration(startTime.diff(now), 'ms')
+              end = startTime.valueOf()
+              before = true
+            } else {
+              remaining = moment.duration(endTime.diff(now), 'ms')
+              end = endTime.valueOf()
+              before = false
             }
-            // Countdown until the next block: passing time or under 1 hour before school
-            if (now.isBefore(endTime)) {
-              let remaining, before, end
-              if (now.isBefore(startTime)) {
-                remaining = moment.duration(startTime.diff(now), 'ms')
-                end = startTime.valueOf()
-                before = true
-              } else {
-                remaining = moment.duration(endTime.diff(now), 'ms')
-                end = endTime.valueOf()
-                before = false
-              }
-              // Return updated countdown text
-              let text = remaining.format('h:mm:ss')
-              this.countdown = {
-                _id: block._id,
-                block, text, before, end, i
-              }
-              // Update tab text when countdown updates
-              this.updateTitle()
-              // Update countdown a hair after the next second
-              this.queueCountdown()
-              return
+            // Return updated countdown text
+            let text = remaining.format('h:mm:ss')
+            this.countdown = {
+              _id: block._id,
+              block, text, before, end, i
             }
-            // Otherwise, check next block
-            else continue
+            // Update tab text when countdown updates
+            this.updateTitle()
+            // Update countdown a hair after the next second
+            this.queueCountdown()
+            return
           }
+          // Otherwise, check next block
+          else continue
         }
         // If the school day is over, reset the countdown--but don't queue it
         // changes to _schedule update it automatically
