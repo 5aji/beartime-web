@@ -1,22 +1,17 @@
 <style lang="stylus">
   
   @import 'global'
-    
-  .today
-    width: 220px !important
-
-  .notToday
-    -webkit-filter: brightness(60%)
-    filter: brightness(60%)
-    
+  
   .dayContainer
     width: 180px
+    margin-right: 6px
     display: flex
     flex-direction: column
     justify-content: space-between
     
     .dayHeader
       width: 100%
+      margin: 0 0 4px 0
       float: left
       text-align: center
       align-self: flex-start
@@ -47,49 +42,41 @@
           transition: all 0.3s
           
           .blockHeader
-            width: calc(100% - 12px)
-            height: 18px
             margin: 6px 6px 0 6px
-            box-sizing: margin-box
-            float: left
             flex-grow: 1
             display: flex
             flex-direction: row
             
-            .blockNum
-              margin: 0
-              padding-right: 5px
-              flex-shrink: 1
-              font-weight: bold
-              
             .blockName
               flex-grow: 1
-              font-weight: 300
               
               .lunch
                 text-decoration: underline
                 cursor: pointer
                 
+            .blockNum
+              margin: 0 6px 0 0
+              flex-shrink: 1
+              font-weight: 700
+              line-height: 21px
+              
             .blockInput
               width: 100%
-              margin: 0
+              margin: 0 0 2px 0
               padding: 0
               flex-grow: 1
               border: none
               outline: none
               background: transparent
-              font-weight: 300
               font-styling()
               
             :focus
-              margin: 0 0 -2px 0
+              margin: 0
               border-bottom: 2px solid white
               
         .classTimes
-          width: calc(100% - 12px)
-          float: left
-          margin: 2px 6px 0 6px 
-          font-size: 11px
+          margin: 0 6px
+          font-size: 12px
           
       .countdown
         flex-basis: 80px
@@ -103,6 +90,16 @@
         .before
           text-transform: uppercase
           font-size: 12px
+          
+  :last-of-type
+    margin-right: 0
+    
+  .today
+    min-width: 220px
+    
+  .notToday
+    -webkit-filter: brightness(60%)
+    filter: brightness(60%)
     
 </style>
 <template>
@@ -115,12 +112,12 @@
           :style="{height: String(block.duration * 1.2) + 'px'}">
           <div class="block" :style="{background: colors[block.number - 1]}">
             <header class="blockHeader" v-if="block.duration >= 20">
-              <span class="blockNum" v-if="block.number">{{ block.number }}</span>
               <span class="blockName" v-if="block.name && !block.lunch">{{ block.name }}</span>
               <span class="blockName" v-if="block.name && block.lunch">
                 <span class="lunch" @click="toggleLunch(date, block.lunch)"
                   title="Toggle Lunch">{{ block.lunch === 1 ? 'First' : 'Second' }}</span> Lunch
               </span>
+              <span class="blockNum" v-if="block.number">{{ block.number }}</span>
               <input class="blockInput" v-if="!block.name" v-model="classes[block.number]"
                 :autofocus="block._id === firstBlock && isDisplayDate && !classes[block.number]" />
             </header>
