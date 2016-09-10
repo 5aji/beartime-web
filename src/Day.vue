@@ -8,6 +8,7 @@
     display: flex
     flex-direction: column
     justify-content: space-between
+    transition: all 0.3s
     
     .dayHeader
       width: 100%
@@ -103,7 +104,7 @@
     
 </style>
 <template>
-  <div class="dayContainer" :class="{ today: isToday, notToday: !isToday }">
+  <div class="dayContainer" :class="{ today: isToday && dimming, notToday: !isToday && dimming }">
     <header class="dayHeader">{{ dateText }}</header>
     <div class="day">
       <div class="noSchool" v-if="_schedule.length === 0">No School</div>
