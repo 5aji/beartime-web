@@ -127,7 +127,7 @@
       fetchSchedule() {
         this.loading = true
         // Fetch weekly schedule from API to cache
-        let url = `/api/week`
+        let url = (this.displayDate === this.today) ? '/api/week' : `/api/week/${ this.displayDate }` 
         Vue.http.get(url, {
           timeout: 10000
         }).then(response => {
