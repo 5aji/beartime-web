@@ -157,8 +157,7 @@
       }
     },
     mounted() {
-      // If the day is the current day, run countdown
-      if (this.isToday) this.getCountdown()
+      this.getCountdown()
     },
     methods: {
       toggleLunch(date) {
@@ -166,8 +165,10 @@
         this.lunches[day] = (this.lunches[day] === 1) ? 2 : 1
       },
       getCountdown() {
-        let now = moment()
+        // Only run countdown for current day
+        if (!this.isToday) return
         // Update current date
+        let now = moment()
         this.today = now.format('YYYY-MM-DD')
         // If a countdown is already in progress, simply increment it down
         // instead of doing a full refresh
