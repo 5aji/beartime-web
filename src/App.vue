@@ -93,8 +93,10 @@
   import Vue from 'vue'
   import VueResource from 'vue-resource'
   Vue.use(VueResource)
+  
   import _uniqueId from 'lodash/uniqueId'
   import moment from 'moment'
+  
   import store from './store'
   import Day from './Day.vue'
   
