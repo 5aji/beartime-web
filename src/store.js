@@ -4,6 +4,7 @@ import moment from 'moment'
 let today = moment().format('YYYY-MM-DD')
 
 export default {
+  dimming: false,
   loading: true,
   schedule: {},
   // Restore saved preferences to over default lunches and classes
@@ -12,7 +13,7 @@ export default {
   classes: _merge({ 1: '', 2: '', 3: '', 4: '', 5: '', 6: '', 7: '' },
     JSON.parse(localStorage.getItem('classes')) || {}),
   // Design constants
-  dimming: false,
+  sizing: 1.2,
   colors: ['#3F51B5', '#1976D2', '#039BE5', '#00BCD4', '#009688', '#43A047', '#7CB342'],
   // Check if client is crawler so it doesn't see a countdown in the title!
   isCrawler: /bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent),
