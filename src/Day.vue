@@ -13,10 +13,9 @@
     .dayHeader
       width: 100%
       margin: 0 0 4px 0
-      float: left
-      text-align: center
-      align-self: flex-start
       flex-grow: 1
+      align-self: flex-start
+      text-align: center
       
     .day
       width: 100%
@@ -106,11 +105,11 @@
 <template>
   <div class="dayContainer" :class="{ today: isToday && dimming, notToday: !isToday && dimming }">
     <header class="dayHeader">{{ dateText }}</header>
-    <div class="day">
+    <div class="day" :style="{marginBottom: endOffset}">
       <div class="noSchool" v-if="_schedule.length === 0">No School</div>
       <transition-group name="list" tag="div">
         <div class="blockContainer" v-for="block in _schedule" :key="block._id"
-          :style="{height: String(block.duration * 1.2) + 'px'}">
+          :style="{height: String(block.duration * sizing) + 'px'}">
           <div class="block" :style="{background: colors[block.number - 1]}">
             <header class="blockHeader" v-if="block.duration >= 20">
               <span class="blockName" v-if="block.name && !block.lunch">{{ block.name }}</span>
@@ -141,6 +140,7 @@
   
   import _merge from 'lodash/merge'
   import _find from 'lodash/find'
+  import _last from 'lodash/last'
   import moment from 'moment'
   import 'moment-duration-format'
   import store from './store'
@@ -272,6 +272,13 @@
       },
       dateText() {
         return moment(this.date, 'YYYY-MM-DD').format('dddd, M/D')
+      },
+      // Determine difference between end of last block and 3pm
+      // Return pixels for offset: the difference times the sizing constant
+      endOffset() {
+        let endTime = moment(_last(this._schedule).end, 'h:ma')
+        let normalEndTime = moment('3pm', 'h:ma')
+        return String(moment.duration(normalEndTime.diff(endTime)).format('m') * this.sizing) + 'px'
       }
     }
   }
