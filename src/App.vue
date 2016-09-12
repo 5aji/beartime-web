@@ -5,10 +5,14 @@
   html, body
     width: 100%
     height: 100%
+    min-width: 1200px
+    min-height: 700px
     margin: 0
     padding: 0
     background: #262626
     font-styling()
+    overflow-x: auto
+    overflow-y: auto
     
   #container
     width: 100%

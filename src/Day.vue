@@ -95,7 +95,7 @@
     margin-right: 0
     
   .today
-    min-width: 220px
+    min-width: 230px
     
   .notToday
     -webkit-filter: brightness(60%)
