@@ -224,7 +224,9 @@
         this.queue = setTimeout(this.getCountdown, 1000 - moment().millisecond() + 20)
       },
       // Trigger full update of countdown by resetting queue and refreshing immediately
+      // Only reset countdown if day is today, otherwise other day components will!
       resetCountdown() {
+        if (!this.isToday) return
         clearTimeout(this.queue)
         this.countdown = { i: 0 }
         this.getCountdown()
