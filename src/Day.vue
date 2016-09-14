@@ -176,8 +176,6 @@
             this.countdown = _merge(this.countdown, {
               text: moment.duration(remaining, 'ms').format('h:mm:ss')
             })
-            // Update tab text when countdown updates
-            this.updateTitle()
             // Queue next countdown refresh
             this.queueCountdown()
             return
@@ -206,8 +204,6 @@
               _id: block._id,
               block, text, before, end, i
             }
-            // Update tab text when countdown updates
-            this.updateTitle()
             // Update countdown a hair after the next second
             this.queueCountdown()
             return
@@ -218,9 +214,12 @@
         // If the school day is over, reset the countdown--but don't queue it
         // changes to _schedule update it automatically
         this.countdown = { i: 0 }
+        this.updateTitle()
       },
-      // Queue subsequent countdown 20s after the next second
       queueCountdown() {
+        // Update tab text when countdown updates
+        this.updateTitle()
+        // Queue subsequent countdown 20s after the next second
         this.queue = setTimeout(this.getCountdown, 1000 - moment().millisecond() + 20)
       },
       // Trigger full update of countdown by resetting queue and refreshing immediately
