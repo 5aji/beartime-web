@@ -21,4 +21,4 @@ For detailed explanation on how things work, consult the [docs for vue-loader](h
 
 ## License
 
-[MIT License](https://raw.githubusercontent.com/Foo-Bear/beartime-web/master/LICENSE)
+[MIT](https://raw.githubusercontent.com/Foo-Bear/beartime-web/master/LICENSE)
