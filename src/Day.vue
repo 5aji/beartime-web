@@ -128,7 +128,7 @@
           <transition name="fade" mode="in-out">
             <div class="countdown" v-if="block._id === countdown._id && block.duration >= 20">
               {{ countdown.text }}
-              <span v-if="countdown.before" class="before">Passing</span>
+              <span v-if="countdown.before" class="before">Before</span>
             </div>
           </transition>
         </div>
