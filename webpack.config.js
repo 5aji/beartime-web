@@ -9,9 +9,6 @@ module.exports = {
     publicPath: '/',
     filename: 'build.js'
   },
-  resolveLoader: {
-    root: path.join(__dirname, 'node_modules'),
-  },
   module: {
     loaders: [
       {
@@ -24,9 +21,6 @@ module.exports = {
         exclude: /node_modules/
       }
     ]
-  },
-  babel: {
-    presets: ['es2015']
   },
   devServer: {
     historyApiFallback: true,
