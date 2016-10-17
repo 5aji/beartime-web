@@ -121,7 +121,7 @@
               <input class="blockInput" v-if="!block.name" v-model="classes[block.number]"
                 :autofocus="block._id === firstBlock && isDisplayDate && !classes[block.number]" />
             </header>
-            <div class="classTimes" v-if="block.duration >= 45">
+            <div class="classTimes" v-if="block.duration >= 40">
               {{ block.start }}-{{ block.end }}
             </div>
           </div>
