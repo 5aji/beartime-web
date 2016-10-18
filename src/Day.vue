@@ -45,7 +45,7 @@
           transition: all 0.3s
           
           .blockHeader
-            margin: 6px 6px 0 6px
+            margin: 5px 6px 0 6px
             flex-grow: 1
             display: flex
             flex-direction: row
