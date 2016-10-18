@@ -17,13 +17,16 @@
       align-self: flex-start
       text-align: center
       
+    .noSchool
+      height: 100%
+      display: flex
+      align-items: center
+      justify-content: center
+      font-size: 18px
+      
     .day
       width: 100%
       align-self: flex-end
-      
-      .noSchool
-        text-align: center
-        font-size: 18px
         
       .list-move
         transition: transform 0.3s cubic-bezier(.55, 0, .1, 1)
@@ -105,8 +108,8 @@
 <template>
   <div class="dayContainer" :class="{ today: isToday && dimming, notToday: !isToday && dimming }">
     <header class="dayHeader">{{ dateText }}</header>
+    <div class="noSchool" v-if="_schedule.length === 0">No School</div>
     <div class="day" :style="{marginBottom: endOffset}">
-      <div class="noSchool" v-if="_schedule.length === 0">No School</div>
       <transition-group name="list" tag="div">
         <div class="blockContainer" v-for="block in _schedule" :key="block._id"
           :style="{height: String(block.duration * sizing) + 'px'}">
@@ -277,9 +280,12 @@
       // Determine difference between end of last block and 3pm
       // Return pixels for offset: the difference times the sizing constant
       endOffset() {
-        let endTime = moment(_last(this._schedule).end, 'h:ma')
-        let normalEndTime = moment('3pm', 'h:ma')
-        return String(moment.duration(normalEndTime.diff(endTime)).format('m') * this.sizing) + 'px'
+        if (this._schedule.length > 0) {
+          let endTime = moment(_last(this._schedule).end, 'h:ma')
+          let normalEndTime = moment('3pm', 'h:ma')
+          return String(moment.duration(normalEndTime.diff(endTime)).format('m') * this.sizing) + 'px'
+        }
+        else return 0
       }
     }
   }
